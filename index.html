@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Truth or Dare</title>
+  </head>
+  <body>
+    <h1>Truth or Dare</h1>
+    <form>
+      <label for="num-players">Number of Players:</label>
+      <input type="number" id="num-players" name="num-players" min="3" max="10" value="3" required>
+
+      <div id="player-names">
+        <label for="player1">Player 1:</label>
+        <input type="text" id="player1" name="player1" required>
+
+        <label for="player2">Player 2:</label>
+        <input type="text" id="player2" name="player2" required>
+
+        <label for="player3">Player 3:</label>
+        <input type="text" id="player3" name="player3" required>
+      </div>
+
+      <button type="button" onclick="startGame()">Start Game</button>
+    </form>
+
+    <script>
+      function startGame() {
+        // Get the number of players
+        var numPlayers = document.getElementById("num-players").value;
+
+        // Get the player names
+        var playerNames = "";
+        for (var i = 1; i <= numPlayers; i++) {
+          var playerName = document.getElementById("player" + i).value;
+          playerNames += "Player " + i + ": " + playerName + "\n";
+        }
+
+        // Display the player names and number of players in an alert box
+        alert("Number of Players: " + numPlayers + "\n" + playerNames);
+      }
+    </script>
+  </body>
+</html>
+
