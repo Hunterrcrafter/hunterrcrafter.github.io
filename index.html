@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Truth or Dare</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<style type="text/css">
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 20px;
+		}
+		.heading {
+			text-align: center;
+			font-size: 40px;
+			font-weight: bold;
+			margin-bottom: 20px;
+		}
+		.input-field {
+			margin-bottom: 10px;
+		}
+		.input-label {
+			display: inline-block;
+			width: 150px;
+			font-size: 20px;
+			font-weight: bold;
+			margin-right: 20px;
+			vertical-align: top;
+		}
+		.input-text {
+			padding: 5px;
+			font-size: 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			width: 400px;
+			max-width: 100%;
+		}
+		.input-number {
+			padding: 5px;
+			font-size: 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			width: 50px;
+		}
+		.button {
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 20px;
+			margin-top: 10px;
+			cursor: pointer;
+			border-radius: 5px;
+		}
+		.game-container {
+			display: none;
+			margin-top: 20px;
+		}
+		.question {
+			font-size: 30px;
+			margin-bottom: 10px;
+			text-align: center;
+		}
+		.player {
+			font-size: 20px;
+			font-weight: bold;
+			margin-bottom: 5px;
+		}
+		.dare {
+			background-color: #FFC107;
+			padding: 10px;
+			margin-bottom: 20px;
+			border-radius: 5px;
+		}
+		.truth {
+			background-color: #03A9F4;
+			padding: 10px;
+			margin-bottom: 20px;
+			border-radius: 5px;
+		}
+		.hidden {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="heading">Truth or Dare</div>
+		<div class="input-field">
+			<label class="input-label">Number of players:</label>
+			<input type="number" id="numPlayers" class="input-number" min="3" max="10">
+		</div>
+		<div class="input-field">
+			<label class="input-label">Player names:</label>
+			<textarea id="playerNames" class="input-text" rows="5"></textarea>
+		</div>
+		<button id="startButton" class="button">Start game</button>
+		<div class="game-container">
+			<div class="question"></div>
+			<div class="player"></div>
+			<div class="dare hidden"></div>
+			<div class="truth hidden"></div>
+			<button
+
