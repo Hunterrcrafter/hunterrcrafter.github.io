@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Truth or Dare</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      input {
+        display: block;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Truth or Dare</h1>
+    <div id="player-form">
+      <h2>Enter player names:</h2>
+      <input type="text" id="player1" placeholder="Player 1" />
+      <input type="text" id="player2" placeholder="Player 2" />
+      <input type="text" id="player3" placeholder="Player 3" />
+      <button id="start-btn">Start Game</button>
+    </div>
+    <div id="game-container" style="display: none;">
+      <h2 id="player-turn"></h2>
+      <h3 id="question"></h3>
+      <button id="truth-btn">Truth</button>
+      <button id="dare-btn">Dare</button>
+    </div>
+    <script>
+      const players = [];
+      let currentPlayerIndex = 0;
+      const truthQuestions = ["Wanneer hebben je ouders je voor het laatst naakt gezien?", "Waarvoor schaam je je nog steeds?", "Ben je ooit (bijna) op een (foto/idee van een) man gecumd?", "Wat is de raarste porno die je ooit gekeken hebt?", "Wie is de jongste die je zou smashen?", "Wat is het meeste zonde van het geld dat je hebt?", "Als je van leven zou mogen wisselen met iemand hier, wie zou het zijn? En waarom?", "Wie zou je het eerste vragen om te helpen met het begraven van een lichaam?"];
+      const dareQuestions = ["Stuur je 69'ste foto naar ons", "Bel je 51'ste contact en zeg niks, iemand mag kreunen", "Geef je telefoon (ontgrendeld) aan je rechterbuur", "Neem een item (Gekozen door de anderen) en verkoop dat zo goed mogelijk voor 3 minuten", "Laat je search history zien op je huidige browser en account", "Trek een zichtbaar kledingstuk naar keuze van de rest uit", "Host een sexuele yoga-les voor ons voor vijf minuten", "Vraag iemand ten huwelijk", "Laat de groep een foto maken en die als je achtergrond zetten voor de komende 24 uur"];
+
+      $("#start-btn").click(() => {
+        const player1 = $("#player1").val().trim();
+        const player2 = $("#player2").val().trim();
+        const player3 = $("#player3").val().trim();
+
+        if (player1 && player2 && player3) {
+          players.push(player1, player2, player3);
+          $("#player-form").hide();
+          $("#game-container").show();
+          showNextQuestion();
+        } else {
+          alert("Please enter all player names.");
+        }
+      });
+
+      function showNextQuestion() {
+        $("#player-turn").text("It's " + players[currentPlayerIndex] + "'s turn.");
+        const nextQuestion = getRandomQuestion();
+        $("#question").text(nextQuestion.text);
+        if (nextQuestion.type === "truth") {
+          $("#truth-btn").show();
+          $("#dare-btn").hide();
+        } else {
+          $("#truth-btn").hide();
+          $("#dare-btn").show();
+        }
+      }
+
+      $("#truth-btn").click(() => {
+        alert("The truth is... " + $("#truth-questions").text());
+        nextPlayer();
+      });
+
+      $("#dare-btn").click(() => {
+        alert("Your dare is... " + questions.text);
+        nextPlayer();
+      });
+
+      function nextPlayer() {
+        currentPlayerIndex++;
+        if (currentPlayerIndex >= players.length) {
+          currentPlayerIndex = 0;
+        }
+        showNextQuestion();
+      }
+
+      function getRandomQuestion() {
+        const randomIndex = Math.floor(Math.random() * (truthQuestions.length + dareQuestions.length));
+        if (randomIndex < truthQuestions.length) {
+          return {
+            type: "truth",
+            text: truthQuestions.join(", ")
+          };
+        } else {
+          return {
+            type: "dare",
+            text: dareQuestions[randomIndex - truthQuestions.length]
+          };
+        }
+      }
+   
