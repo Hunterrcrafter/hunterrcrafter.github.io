@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Truth or Dare</title>
+</head>
+<body>
+	<h1>Truth or Dare</h1>
+	<p>Enter the names of the players below:</p>
+	<form>
+		<label for="player1">Player 1:</label>
+		<input type="text" id="player1" name="player1"><br>
+		<label for="player2">Player 2:</label>
+		<input type="text" id="player2" name="player2"><br>
+		<label for="player3">Player 3:</label>
+		<input type="text" id="player3" name="player3"><br>
+		<button type="button" onclick="startGame()">Start Game</button>
+	</form>
+	<br>
+	<div id="truthOrDareSection" style="display:none">
+		<p><strong>Truth or Dare:</strong> <span id="truthOrDare"></span></p>
+		<p><strong>Current Player:</strong> <span id="currentPlayer"></span></p>
+		<button type="button" onclick="nextPlayer()">Next Player</button>
+	</div>
+	
+	<script>
+		var players = [];
+		var currentPlayerIndex = -1;
+		var truths = ["Wanneer hebben je ouders je voor het laatst naakt gezien?", "Waarvoor schaam je je nog steeds?", "Ben je ooit (bijna) op een (foto/idee van een) man gecumd?", "Wat is de raarste porno die je ooit gekeken hebt?", "Wie is de jongste die je zou smashen?", "Wat is het meeste zonde van het geld dat je hebt?", "Als je van leven zou mogen wisselen met iemand hier, wie zou het zijn? En waarom?", "Wie zou je het eerste vragen om te helpen met het begraven van een lichaam?"];
+		var dares = ["Stuur je 69'ste foto naar ons", "Bel je 51'ste contact en zeg niks, iemand mag kreunen", "Geef je telefoon (ontgrendeld) aan je rechterbuur", "Neem een item (Gekozen door de anderen) en verkoop dat zo goed mogelijk voor 3 minuten", "Laat je search history zien op je huidige browser en account", "Trek een zichtbaar kledingstuk naar keuze van de rest uit", "Host een sexuele yoga-les voor ons voor vijf minuten", "Vraag iemand ten huwelijk", "Laat de groep een foto maken en die als je achtergrond zetten voor de komende 24 uur"];
+		
+		function startGame() {
+			var player1 = document.getElementById("player1").value.trim();
+			var player2 = document.getElementById("player2").value.trim();
+			var player3 = document.getElementById("player3").value.trim();
+			
+			if(player1==="" || player2==="" || player3==="") {
+				alert("Please enter the names of all players.");
+				return;
+			}
+			
+			players = [player1, player2, player3];
+			currentPlayerIndex = 0;
+			showTruthOrDare();
+		}
+		
+		function showTruthOrDare() {
+			document.getElementById("truthOrDare").innerHTML = getRandomTruthOrDare();
+			document.getElementById("currentPlayer").innerHTML = players[currentPlayerIndex];
+			document.getElementById("truthOrDareSection").style.display = "block";
+		}
+		
+		function getRandomTruthOrDare() {
+			var randomNumber = Math.floor(Math.random() * 2);
+			if(randomNumber === 0) {
+				return getRandomTruth();
+			} else {
+				return getRandomDare();
+			}
+		}
+		
+		function getRandomTruth() {
+			var randomNumber = Math.floor(Math.random() * truths.length);
+			return truths[randomNumber];
+		}
+		
+		function getRandomDare() {
+			var randomNumber = Math.floor(Math.random() * dares.length);
+			return dares[randomNumber];
+		}
+		
+		function nextPlayer() {
+			currentPlayerIndex++;
+			if(currentPlayerIndex >= players.length) {
+				currentPlayerIndex = 0;
+			}
+			showTruthOrDare();
+		}
+	</script>
+</body>
+</html>
